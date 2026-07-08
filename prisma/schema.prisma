@@ -1,0 +1,86 @@
+// gdFinance — KPO knjiga za paušalne firme
+// Novac se čuva kao CEO BROJ u parama (1 RSD = 100 para) radi prenosivosti i tačnosti.
+// redniBroj i kumulativ se NE skladište — računaju se pri čitanju (sort po datumNaplate).
+//
+// LOKALNI RAZVOJ: SQLite (provider = "sqlite", DATABASE_URL="file:./dev.db").
+// PRODUKCIJA (Neon/Supabase): promeni provider u "postgresql" i DATABASE_URL, pa `prisma db push`.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  password  String
+  companies Company[]
+  createdAt DateTime  @default(now())
+}
+
+model Company {
+  id              String     @id @default(cuid())
+  userId          String
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  naziv           String
+  pib             String?
+  maticniBroj     String?
+  adresa          String?
+  sifraDelatnosti String?
+  pausalLimit     Int        @default(600000000) // 6.000.000 RSD u parama (prag gubitka paušala)
+  isSefEnabled    Boolean    @default(false)
+  clients         Client[]
+  kpoEntries      KpoEntry[]
+  debts           Debt[]
+  createdAt       DateTime   @default(now())
+
+  @@index([userId])
+}
+
+model Client {
+  id         String     @id @default(cuid())
+  companyId  String
+  company    Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  naziv      String
+  pib        String?
+  adresa     String?
+  kpoEntries KpoEntry[]
+  createdAt  DateTime   @default(now())
+
+  @@index([companyId])
+}
+
+model KpoEntry {
+  id              String   @id @default(cuid())
+  companyId       String
+  company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  godina          Int
+  datumNaplate    DateTime
+  brojIsprave     String?
+  opis            String?
+  clientId        String?
+  client          Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  prihodProizvodi Int      @default(0) // para
+  prihodUsluge    Int      @default(0) // para
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([companyId, godina, datumNaplate])
+  @@index([clientId])
+}
+
+model Debt {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  klijent   String
+  iznos     Int // para (dug klijenta)
+  createdAt DateTime @default(now())
+
+  @@index([companyId])
+}

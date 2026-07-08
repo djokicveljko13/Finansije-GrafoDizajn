@@ -1,0 +1,66 @@
+
+> gdfinance@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.32:3000
+- Environments: .env
+✓ Ready in 766ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\Win11\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Win11\Desktop\gdFinance\package-lock.json
+
+
+ GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 2.3s (next.js: 1187ms, application-code: 1078ms)
+ GET /firma/cmrawb22i0002tyk465kzpq7a/dugovanja 200 in 949ms (next.js: 796ms, application-code: 153ms)
+ POST /firma/cmrawb22i0002tyk465kzpq7a/dugovanja 200 in 181ms (next.js: 22ms, application-code: 159ms)
+  └─ ƒ payPartialDebt("cmrawb22i0002tyk465kzpq7a", "cmrch9cwd0003tyak7i3n2g57", undefined, {}) in 32ms src/lib/dugovanja-actions.ts
+ POST /firma/cmrawb22i0002tyk465kzpq7a/dugovanja 200 in 51ms (next.js: 17ms, application-code: 34ms)
+  └─ ƒ payPartialDebt("cmrawb22i0002tyk465kzpq7a", "cmrch9cwd0003tyak7i3n2g57", undefined, {}) in 17ms src/lib/dugovanja-actions.ts
+ POST /firma/cmrawb22i0002tyk465kzpq7a/dugovanja 200 in 132ms (next.js: 29ms, application-code: 103ms)
+  └─ ƒ deleteDebt("cmrawb22i0002tyk465kzpq7a", "cmrch9cwd0003tyak7i3n2g57") in 25ms src/lib/dugovanja-actions.ts
+ GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 104ms (next.js: 15ms, application-code: 88ms)
+ GET /izbor-kompanije 200 in 186ms (next.js: 69ms, application-code: 116ms)
+ GET /firma/cmrawb22n0004tyk48mecqswm 200 in 103ms (next.js: 12ms, application-code: 91ms)
+ GET /izbor-kompanije 200 in 64ms (next.js: 7ms, application-code: 57ms)
+ GET /firma/cmrawb22w0006tyk47mchfnme 200 in 79ms (next.js: 12ms, application-code: 67ms)
+ GET /izbor-kompanije 200 in 67ms (next.js: 6ms, application-code: 61ms)
+ GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 90ms (next.js: 12ms, application-code: 78ms)
+ POST /firma/cmrawb22i0002tyk465kzpq7a 200 in 137ms (next.js: 15ms, application-code: 122ms)
+  └─ ƒ createKpoEntry("cmrawb22i0002tyk465kzpq7a", undefined, {}) in 30ms src/lib/kpo-actions.ts
+ GET /firma/cmrawb22i0002tyk465kzpq7a?godina=2025 200 in 75ms (next.js: 11ms, application-code: 64ms)
+ POST /firma/cmrawb22i0002tyk465kzpq7a?godina=2025 200 in 109ms (next.js: 13ms, application-code: 96ms)
+  └─ ƒ deleteKpoEntry("cmrawb22i0002tyk465kzpq7a", "cmrchmvsm0001tyqo3al1zepv") in 20ms src/lib/kpo-actions.ts
+ GET /firma/cmrawb22i0002tyk465kzpq7a?godina=2025 200 in 153ms (next.js: 16ms, application-code: 137ms)
+ GET /izbor-kompanije 200 in 74ms (next.js: 6ms, application-code: 68ms)
+ GET /firma/cmrawb22w0006tyk47mchfnme 200 in 91ms (next.js: 14ms, application-code: 77ms)
+ GET /izbor-kompanije 200 in 58ms (next.js: 6ms, application-code: 52ms)
+ GET /firma/cmrawb22n0004tyk48mecqswm 200 in 86ms (next.js: 12ms, application-code: 75ms)
+ GET /firma/cmrawb22n0004tyk48mecqswm/pregledPrometa 200 in 822ms (next.js: 723ms, application-code: 99ms)
+ GET /firma/cmrawb22n0004tyk48mecqswm 200 in 100ms (next.js: 12ms, application-code: 88ms)
+ POST /firma/cmrawb22n0004tyk48mecqswm 200 in 107ms (next.js: 11ms, application-code: 95ms)
+  └─ ƒ deleteKpoEntry("cmrawb22n0004tyk48mecqswm", "cmraxw5ww0007ty2ov6j1wfry") in 26ms src/lib/kpo-actions.ts
+ GET /izbor-kompanije 200 in 51ms (next.js: 6ms, application-code: 45ms)
+ GET /firma/cmrawb22n0004tyk48mecqswm 200 in 78ms (next.js: 11ms, application-code: 67ms)
+ GET /izbor-kompanije 200 in 54ms (next.js: 6ms, application-code: 48ms)
+ GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 97ms (next.js: 13ms, application-code: 85ms)
+ POST /firma/cmrawb22i0002tyk465kzpq7a 200 in 133ms (next.js: 14ms, application-code: 119ms)
+  └─ ƒ deleteKpoEntry("cmrawb22i0002tyk465kzpq7a", "cmrawb23j000ftyk4pbqbdd0v") in 18ms src/lib/kpo-actions.ts
+ POST /firma/cmrawb22i0002tyk465kzpq7a 200 in 126ms (next.js: 6ms, application-code: 119ms)
+  └─ ƒ deleteKpoEntry("cmrawb22i0002tyk465kzpq7a", "cmrawb23j000etyk4zofak7og") in 19ms src/lib/kpo-actions.ts
+ POST /firma/cmrawb22i0002tyk465kzpq7a 200 in 138ms (next.js: 29ms, application-code: 109ms)
+  └─ ƒ deleteKpoEntry("cmrawb22i0002tyk465kzpq7a", "cmrawb23j000dtyk40pvikulw") in 19ms src/lib/kpo-actions.ts
+ GET /firma/cmrawb22i0002tyk465kzpq7a/pregledPrometa 200 in 99ms (next.js: 12ms, application-code: 87ms)
+ GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 85ms (next.js: 13ms, application-code: 72ms)
+ GET /izbor-kompanije 200 in 56ms (next.js: 5ms, application-code: 52ms)
+ GET /firma/cmrawb22w0006tyk47mchfnme 200 in 83ms (next.js: 15ms, application-code: 69ms)
+ GET /izbor-kompanije 200 in 51ms (next.js: 5ms, application-code: 46ms)
+ GET /firma/cmrawb22n0004tyk48mecqswm 200 in 78ms (next.js: 12ms, application-code: 66ms)
+ GET /izbor-kompanije 200 in 57ms (next.js: 5ms, application-code: 52ms)
+ GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 86ms (next.js: 12ms, application-code: 74ms)
+ GET /izbor-kompanije 200 in 53ms (next.js: 7ms, application-code: 46ms)
+ GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 80ms (next.js: 12ms, application-code: 69ms)
