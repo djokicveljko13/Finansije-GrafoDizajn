@@ -64,3 +64,7 @@
  GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 86ms (next.js: 12ms, application-code: 74ms)
  GET /izbor-kompanije 200 in 53ms (next.js: 7ms, application-code: 46ms)
  GET /firma/cmrawb22i0002tyk465kzpq7a 200 in 80ms (next.js: 12ms, application-code: 69ms)
+ GET /izbor-kompanije 200 in 60ms (next.js: 6ms, application-code: 54ms)
+ GET /firma/cmrawb22w0006tyk47mchfnme 200 in 78ms (next.js: 11ms, application-code: 67ms)
+ GET /izbor-kompanije 200 in 54ms (next.js: 6ms, application-code: 47ms)
+ GET /firma/cmrawb22w0006tyk47mchfnme 200 in 75ms (next.js: 12ms, application-code: 64ms)
