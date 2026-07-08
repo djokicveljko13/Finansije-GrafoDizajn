@@ -6,8 +6,12 @@ const prisma = new PrismaClient();
 
 async function main() {
   const email = process.env.SEED_OWNER_EMAIL ?? "tata@gdfinance.rs";
-  const password = process.env.SEED_OWNER_PASSWORD ?? "tata123";
+  const password = process.env.SEED_OWNER_PASSWORD;
   const name = process.env.SEED_OWNER_NAME ?? "Vlasnik";
+
+  if (!password) {
+    throw new Error("SEED_OWNER_PASSWORD nije podešen u .env fajlu.");
+  }
 
   const passwordHash = await bcrypt.hash(password, 10);
 
