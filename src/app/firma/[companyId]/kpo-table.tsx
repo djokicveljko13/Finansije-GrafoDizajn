@@ -40,7 +40,7 @@ export function KpoTable({
           <tr className="border-b bg-muted/50 text-left text-muted-foreground">
             <th className="p-2 font-medium">Redni broj</th>
             <th className="p-2 font-medium">Datum naplate</th>
-            <th className="p-2 font-medium">Broj isprave</th>
+            <th className="p-2 font-medium">Broj fakture</th>
             <th className="p-2 font-medium">Opis</th>
             <th className="p-2 font-medium">Klijent</th>
             <th className="p-2 text-right font-medium">Proizvodi</th>

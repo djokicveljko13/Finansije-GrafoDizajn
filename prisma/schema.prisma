@@ -2,16 +2,18 @@
 // Novac se čuva kao CEO BROJ u parama (1 RSD = 100 para) radi prenosivosti i tačnosti.
 // redniBroj i kumulativ se NE skladište — računaju se pri čitanju (sort po datumNaplate).
 //
-// LOKALNI RAZVOJ: SQLite (provider = "sqlite", DATABASE_URL="file:./dev.db").
-// PRODUKCIJA (Neon/Supabase): promeni provider u "postgresql" i DATABASE_URL, pa `prisma db push`.
+// BAZA: Neon Postgres. DATABASE_URL = pooled string (aplikacija),
+// DIRECT_URL = direktan string (samo za `prisma db push` / migracije).
+// LOKALNI RAZVOJ: Neon dev branch — stringovi dev brancha idu u lokalni .env.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {

@@ -57,7 +57,7 @@ export function KpoForm({
       </div>
 
       <div className="flex flex-col gap-2 lg:col-span-1">
-        <Label htmlFor="brojIsprave">Broj isprave</Label>
+        <Label htmlFor="brojIsprave">Broj fakture</Label>
         <Input id="brojIsprave" name="brojIsprave" placeholder="npr. 15/24" />
       </div>
 

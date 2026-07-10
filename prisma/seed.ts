@@ -32,10 +32,10 @@ async function main() {
     data: {
       userId: user.id,
       naziv: "Grafo Dizajn",
-      pib: "100200300",
-      maticniBroj: "60123456",
+      pib: "105812010",
+      maticniBroj: "61923306",
       adresa: "Jagodina",
-      sifraDelatnosti: "7410", // Specijalizovane dizajnerske delatnosti
+      sifraDelatnosti: "1812",
       isSefEnabled: true,
     },
   });
@@ -44,10 +44,10 @@ async function main() {
     data: {
       userId: user.id,
       naziv: "VP Elite Design",
-      pib: "100200301",
-      maticniBroj: "60123457",
+      pib: "112627869",
+      maticniBroj: "66240657",
       adresa: "Jagodina",
-      sifraDelatnosti: "7410", // Specijalizovane dizajnerske delatnosti
+      sifraDelatnosti: "1812",
       isSefEnabled: false,
     },
   });
@@ -56,13 +56,22 @@ async function main() {
     data: {
       userId: user.id,
       naziv: "SD Štampa",
-      pib: "100200302",
-      maticniBroj: "60123458",
+      pib: "113889315",
+      maticniBroj: "67162048",
       adresa: "Jagodina",
-      sifraDelatnosti: "1812", // Ostalo štampanje
+      sifraDelatnosti: "1812",
       isSefEnabled: false,
     },
   });
+
+  // Test klijenti i KPO upisi samo za lokalni razvoj (SEED_DEMO=1) —
+  // produkcija kreće bez upisa, tata unosi prave podatke.
+  if (process.env.SEED_DEMO !== "1") {
+    console.log("Seed gotov (bez demo podataka):");
+    console.log(`  Vlasnik: ${email}`);
+    console.log(`  Firme: ${firma1.naziv}, ${firma2.naziv}, ${firma3.naziv}`);
+    return;
+  }
 
   const k1 = await prisma.client.create({
     data: { companyId: firma1.id, naziv: "Reklama Studio DOO", pib: "101010101" },
@@ -110,8 +119,8 @@ async function main() {
     ],
   });
 
-  console.log("Seed gotov:");
-  console.log(`  Vlasnik: ${email} / lozinka: ${password}`);
+  console.log("Seed gotov (sa demo podacima):");
+  console.log(`  Vlasnik: ${email}`);
   console.log(`  Firme: ${firma1.naziv}, ${firma2.naziv}, ${firma3.naziv}`);
 }
 
