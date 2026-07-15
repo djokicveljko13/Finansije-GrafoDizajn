@@ -36,23 +36,31 @@ model Company {
   sifraDelatnosti String?
   pausalLimit     Int        @default(600000000) // 6.000.000 RSD u parama (prag gubitka paušala)
   isSefEnabled    Boolean    @default(false)
+  racun           String? // tekući račun, npr. "160-6000001236873-68"
+  telefon         String?
+  email           String?
+  mesto           String? // mesto fakturisanja/prometa na fakturi
   clients         Client[]
   kpoEntries      KpoEntry[]
   debts           Debt[]
+  fakture         Faktura[]
   createdAt       DateTime   @default(now())
 
   @@index([userId])
 }
 
 model Client {
-  id         String     @id @default(cuid())
-  companyId  String
-  company    Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  naziv      String
-  pib        String?
-  adresa     String?
-  kpoEntries KpoEntry[]
-  createdAt  DateTime   @default(now())
+  id          String     @id @default(cuid())
+  companyId   String
+  company     Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  naziv       String
+  pib         String?
+  maticniBroj String?
+  adresa      String?
+  mesto       String?
+  kpoEntries  KpoEntry[]
+  fakture     Faktura[]
+  createdAt   DateTime   @default(now())
 
   @@index([companyId])
 }
@@ -69,11 +77,55 @@ model KpoEntry {
   client          Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
   prihodProizvodi Int      @default(0) // para
   prihodUsluge    Int      @default(0) // para
+  // Upis nastao iz fakture — brisanje fakture briše i ovaj upis (kaskada na nivou baze).
+  fakturaId       String?  @unique
+  faktura         Faktura? @relation(fields: [fakturaId], references: [id], onDelete: Cascade)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   @@index([companyId, godina, datumNaplate])
   @@index([clientId])
+}
+
+model Faktura {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  broj      Int // numerički deo; 52 -> prikaz "052/2026"
+  godina    Int // uvek izvedeno iz datum.getFullYear()
+  datum     DateTime // datum fakturisanja = datum prometa dobara
+  valuta    DateTime // rok plaćanja (podrazumevano datum + 7 dana)
+
+  // Snapshot kupca u trenutku izdavanja — kasnija izmena klijenta ne menja stare fakture.
+  kupacNaziv       String
+  kupacAdresa      String?
+  kupacMesto       String?
+  kupacPib         String?
+  kupacMaticniBroj String?
+  clientId         String?
+  client           Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  ukupno    Int // para — zbir stavki
+  stavke    FakturaStavka[]
+  kpoEntry  KpoEntry?
+  createdAt DateTime        @default(now())
+
+  @@unique([companyId, godina, broj])
+  @@index([companyId, godina])
+}
+
+model FakturaStavka {
+  id           String  @id @default(cuid())
+  fakturaId    String
+  faktura      Faktura @relation(fields: [fakturaId], references: [id], onDelete: Cascade)
+  redosled     Int
+  naziv        String
+  jedinicaMere String  @default("kom")
+  kolicina     Int // u stotinkama (6000 = 60,00) — ista konvencija kao para
+  cena         Int // para po jedinici
+  ukupno       Int // para = Math.round(kolicina * cena / 100)
+
+  @@index([fakturaId])
 }
 
 model Debt {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { ArrowLeft, BarChart3, Wallet } from "lucide-react";
+import { ArrowLeft, BarChart3, FilePlus, FileText, Wallet } from "lucide-react";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { Button } from "@/components/ui/button";
@@ -81,6 +81,27 @@ export default async function FirmaPage({
           </p>
         </div>
         <div className="flex gap-2">
+          <Button
+            size="sm"
+            nativeButton={false}
+            render={
+              <Link href={`/firma/${companyId}/fakture/nova`}>
+                <FilePlus className="size-4" />
+                Napravi fakturu
+              </Link>
+            }
+          />
+          <Button
+            variant="outline"
+            size="sm"
+            nativeButton={false}
+            render={
+              <Link href={`/firma/${companyId}/fakture`}>
+                <FileText className="size-4" />
+                Fakture
+              </Link>
+            }
+          />
           <Button
             variant="outline"
             size="sm"

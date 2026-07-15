@@ -21,10 +21,28 @@ async function main() {
     create: { email, name, password: passwordHash },
   });
 
-  // Ako firme već postoje za ovog korisnika, ne dupliramo seed.
+  // Podaci za zaglavlje fakture (računa) — za VP Elite sa prave fakture.
+  const fakturaPodaci = {
+    "112627869": {
+      adresa: "Branka Radičevića, Međureč",
+      mesto: "Međureč",
+      racun: "160-6000001236873-68",
+      telefon: "064 11 60 971",
+      email: "stampavelikihformatagd@gmail.com",
+    },
+    "105812010": { mesto: "Jagodina" },
+    "113889315": { mesto: "Jagodina" },
+  } as const;
+
+  // Ako firme već postoje za ovog korisnika, samo dopunimo nove kolone (backfill).
   const existing = await prisma.company.count({ where: { userId: user.id } });
   if (existing > 0) {
-    console.log(`Korisnik ${email} već ima ${existing} firmi — preskačem seed firmi.`);
+    for (const [pib, data] of Object.entries(fakturaPodaci)) {
+      await prisma.company.updateMany({ where: { userId: user.id, pib }, data });
+    }
+    console.log(
+      `Korisnik ${email} već ima ${existing} firmi — dopunjeni podaci za fakture, preskačem seed firmi.`
+    );
     return;
   }
 
@@ -37,6 +55,7 @@ async function main() {
       adresa: "Jagodina",
       sifraDelatnosti: "1812",
       isSefEnabled: true,
+      ...fakturaPodaci["105812010"],
     },
   });
 
@@ -46,9 +65,9 @@ async function main() {
       naziv: "VP Elite Design",
       pib: "112627869",
       maticniBroj: "66240657",
-      adresa: "Jagodina",
       sifraDelatnosti: "1812",
       isSefEnabled: false,
+      ...fakturaPodaci["112627869"],
     },
   });
 
@@ -61,6 +80,7 @@ async function main() {
       adresa: "Jagodina",
       sifraDelatnosti: "1812",
       isSefEnabled: false,
+      ...fakturaPodaci["113889315"],
     },
   });
 
